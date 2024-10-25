@@ -531,7 +531,6 @@ func fetchWorkerTotals(accountID string) (*cloudflareResponseAccts, error) {
 					dimensions {
 						scriptName
 						status
-						datetime
 					}
 
 					sum {
