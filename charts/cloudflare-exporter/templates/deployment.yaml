@@ -4,6 +4,7 @@ metadata:
   name: {{ include "cloudflare-exporter.fullname" . }}
   labels:
     {{- include "cloudflare-exporter.labels" . | nindent 4 }}
+    {{- toYaml .Values.podLabels | nindent 4 }}
   {{- with .Values.deploymentAnnotations }}
   annotations: {{- toYaml . | nindent 4 }}
   {{- end }}
