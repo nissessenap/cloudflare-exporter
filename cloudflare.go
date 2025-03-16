@@ -455,7 +455,7 @@ query ($zoneIDs: [String!], $mintime: Time!, $maxtime: Time!, $limit: Int!) {
 
 	var resp cloudflareResponse
 	if err := graphqlClient.Run(ctx, request, &resp); err != nil {
-		log.Error(err)
+		log.Error("failed to fetch zone totals: ", err)
 		return nil, err
 	}
 
@@ -510,7 +510,7 @@ func fetchColoTotals(zoneIDs []string) (*cloudflareResponseColo, error) {
 	graphqlClient := graphql.NewClient(cfGraphQLEndpoint)
 	var resp cloudflareResponseColo
 	if err := graphqlClient.Run(ctx, request, &resp); err != nil {
-		log.Error(err)
+		log.Error("failed to fetch colocation totals: ", err)
 		return nil, err
 	}
 
@@ -570,7 +570,7 @@ func fetchWorkerTotals(accountID string) (*cloudflareResponseAccts, error) {
 	graphqlClient := graphql.NewClient(cfGraphQLEndpoint)
 	var resp cloudflareResponseAccts
 	if err := graphqlClient.Run(ctx, request, &resp); err != nil {
-		log.Error(err)
+		log.Error("failed to fetch worker totals: ", err)
 		return nil, err
 	}
 
@@ -647,7 +647,7 @@ func fetchLoadBalancerTotals(zoneIDs []string) (*cloudflareResponseLb, error) {
 	graphqlClient := graphql.NewClient(cfGraphQLEndpoint)
 	var resp cloudflareResponseLb
 	if err := graphqlClient.Run(ctx, request, &resp); err != nil {
-		log.Error(err)
+		log.Error("failed to fetch load balancer totals: ", err)
 		return nil, err
 	}
 	return &resp, nil
@@ -699,7 +699,7 @@ func fetchLogpushAccount(accountID string) (*cloudflareResponseLogpushAccount, e
 	graphqlClient := graphql.NewClient(cfGraphQLEndpoint)
 	var resp cloudflareResponseLogpushAccount
 	if err := graphqlClient.Run(ctx, request, &resp); err != nil {
-		log.Error(err)
+		log.Error("failed to logpush account info: ", err)
 		return nil, err
 	}
 	return &resp, nil
@@ -751,7 +751,7 @@ func fetchLogpushZone(zoneIDs []string) (*cloudflareResponseLogpushZone, error) 
 	graphqlClient := graphql.NewClient(cfGraphQLEndpoint)
 	var resp cloudflareResponseLogpushZone
 	if err := graphqlClient.Run(ctx, request, &resp); err != nil {
-		log.Error(err)
+		log.Error("failed to fetch logpush zone: ", err)
 		return nil, err
 	}
 
