@@ -310,6 +310,16 @@ func fetchFirewallRules(zoneID string) map[string]string {
 				firewallRulesMap[rule.ID] = rule.Description
 			}
 		}
+
+		if rulesetDesc.Phase == "http_request_firewall_custom" {
+			ruleset, err := api.GetRuleset(ctx, cloudflare.ZoneIdentifier(zoneID), rulesetDesc.ID)
+			if err != nil {
+				log.Fatal(err)
+			}
+			for _, rule := range ruleset.Rules {
+				firewallRulesMap[rule.ID] = rule.Description
+			}
+		}
 	}
 
 	return firewallRulesMap
