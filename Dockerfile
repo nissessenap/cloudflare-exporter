@@ -1,4 +1,5 @@
-FROM golang:alpine as builder
+# check=skip=SecretsUsedInArgOrEnv we're just set default here, not any secret data
+FROM golang:alpine AS builder
 
 WORKDIR /app
 
@@ -17,7 +18,7 @@ RUN apk update && apk add ca-certificates
 
 COPY --from=builder /app/cloudflare_exporter cloudflare_exporter
 
-ENV CF_API_KEY ""
-ENV CF_API_EMAIL ""
+ENV CF_API_KEY=""
+ENV CF_API_EMAIL=""
 
 ENTRYPOINT [ "./cloudflare_exporter" ]
