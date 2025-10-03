@@ -9,6 +9,7 @@ import (
 	"github.com/biter777/countries"
 	cloudflare "github.com/cloudflare/cloudflare-go"
 	"github.com/prometheus/client_golang/prometheus"
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
@@ -418,6 +419,7 @@ func fetchWorkerAnalytics(account cloudflare.Account, wg *sync.WaitGroup) {
 
 	r, err := fetchWorkerTotals(account.ID)
 	if err != nil {
+		log.Error("failed to fetch worker analytics for account ", account.ID, ": ", err)
 		return
 	}
 
@@ -451,6 +453,7 @@ func fetchLogpushAnalyticsForAccount(account cloudflare.Account, wg *sync.WaitGr
 	r, err := fetchLogpushAccount(account.ID)
 
 	if err != nil {
+		log.Error("failed to fetch logpush analytics for account ", account.ID, ": ", err)
 		return
 	}
 
@@ -480,6 +483,7 @@ func fetchLogpushAnalyticsForZone(zones []cloudflare.Zone, wg *sync.WaitGroup) {
 	r, err := fetchLogpushZone(zoneIDs)
 
 	if err != nil {
+		log.Error("failed to fetch logpush analytics for zones: ", err)
 		return
 	}
 
@@ -508,6 +512,7 @@ func fetchZoneColocationAnalytics(zones []cloudflare.Zone, wg *sync.WaitGroup) {
 
 	r, err := fetchColoTotals(zoneIDs)
 	if err != nil {
+		log.Error("failed to fetch colocation analytics for zones: ", err)
 		return
 	}
 	for _, z := range r.Viewer.Zones {
@@ -537,6 +542,7 @@ func fetchZoneAnalytics(zones []cloudflare.Zone, wg *sync.WaitGroup) {
 
 	r, err := fetchZoneTotals(zoneIDs)
 	if err != nil {
+		log.Error("failed to fetch zone analytics: ", err)
 		return
 	}
 
@@ -688,6 +694,7 @@ func fetchLoadBalancerAnalytics(zones []cloudflare.Zone, wg *sync.WaitGroup) {
 
 	l, err := fetchLoadBalancerTotals(zoneIDs)
 	if err != nil {
+		log.Error("failed to fetch load balancer analytics: ", err)
 		return
 	}
 	for _, lb := range l.Viewer.Zones {
