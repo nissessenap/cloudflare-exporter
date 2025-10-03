@@ -311,7 +311,17 @@ func fetchFirewallRules(zoneID string) map[string]string {
 		if rulesetDesc.Phase == "http_request_firewall_managed" {
 			ruleset, err := cloudflareAPI.GetRuleset(ctx, cloudflare.ZoneIdentifier(zoneID), rulesetDesc.ID)
 			if err != nil {
-				log.Fatalf("Error fetching ruleset: %s", err)
+        log.Fatalf("Error fetching ruleset for firewall rules: %s", err)
+			}
+			for _, rule := range ruleset.Rules {
+				firewallRulesMap[rule.ID] = rule.Description
+			}
+		}
+
+		if rulesetDesc.Phase == "http_request_firewall_custom" {
+			ruleset, err := api.GetRuleset(ctx, cloudflare.ZoneIdentifier(zoneID), rulesetDesc.ID)
+			if err != nil {
+        log.Fatal("Error fetching custom firewall rulesets: %s" err)
 			}
 			for _, rule := range ruleset.Rules {
 				firewallRulesMap[rule.ID] = rule.Description
@@ -451,7 +461,7 @@ query ($zoneIDs: [String!], $mintime: Time!, $maxtime: Time!, $limit: Int!) {
 
 	var resp cloudflareResponse
 	if err := graphqlClient.Run(ctx, request, &resp); err != nil {
-		log.Error(err)
+		log.Error("failed to fetch zone totals: ", err)
 		return nil, err
 	}
 
@@ -506,7 +516,7 @@ func fetchColoTotals(zoneIDs []string) (*cloudflareResponseColo, error) {
 	graphqlClient := graphql.NewClient(cfGraphQLEndpoint)
 	var resp cloudflareResponseColo
 	if err := graphqlClient.Run(ctx, request, &resp); err != nil {
-		log.Error(err)
+		log.Error("failed to fetch colocation totals: ", err)
 		return nil, err
 	}
 
