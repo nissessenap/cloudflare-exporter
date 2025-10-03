@@ -259,13 +259,13 @@ func fetchZones() []cloudflare.Zone {
 		api, err = cloudflare.New(viper.GetString("cf_api_key"), viper.GetString("cf_api_email"))
 	}
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("failed to make client to fetch zones: ", err)
 	}
 
 	ctx := context.Background()
 	z, err := api.ListZones(ctx)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("failed to fetch zones: ", err)
 	}
 
 	return z
@@ -280,7 +280,7 @@ func fetchFirewallRules(zoneID string) map[string]string {
 		api, err = cloudflare.New(viper.GetString("cf_api_key"), viper.GetString("cf_api_email"))
 	}
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("failed to make client to fetch firewall rules: ", err)
 	}
 
 	ctx := context.Background()
@@ -288,7 +288,7 @@ func fetchFirewallRules(zoneID string) map[string]string {
 		cloudflare.ZoneIdentifier(zoneID),
 		cloudflare.FirewallRuleListParams{})
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("failed to fetch firewall rules: ", err)
 	}
 	firewallRulesMap := make(map[string]string)
 
@@ -298,13 +298,13 @@ func fetchFirewallRules(zoneID string) map[string]string {
 
 	listOfRulesets, err := api.ListRulesets(ctx, cloudflare.ZoneIdentifier(zoneID), cloudflare.ListRulesetsParams{})
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("failed to fetch list of rulesets for firewall rules: ", err)
 	}
 	for _, rulesetDesc := range listOfRulesets {
 		if rulesetDesc.Phase == "http_request_firewall_managed" {
 			ruleset, err := api.GetRuleset(ctx, cloudflare.ZoneIdentifier(zoneID), rulesetDesc.ID)
 			if err != nil {
-				log.Fatal(err)
+				log.Fatal("failed to fetch ruleset for firewall rules: ", err)
 			}
 			for _, rule := range ruleset.Rules {
 				firewallRulesMap[rule.ID] = rule.Description
@@ -324,13 +324,13 @@ func fetchAccounts() []cloudflare.Account {
 		api, err = cloudflare.New(viper.GetString("cf_api_key"), viper.GetString("cf_api_email"))
 	}
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("failed to make client to fetch accounts: ", err)
 	}
 
 	ctx := context.Background()
 	a, _, err := api.Accounts(ctx, cloudflare.AccountsListParams{PaginationOptions: cloudflare.PaginationOptions{PerPage: 100}})
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("failed to fetch accounts: ", err)
 	}
 
 	return a
@@ -455,7 +455,7 @@ query ($zoneIDs: [String!], $mintime: Time!, $maxtime: Time!, $limit: Int!) {
 
 	var resp cloudflareResponse
 	if err := graphqlClient.Run(ctx, request, &resp); err != nil {
-		log.Error(err)
+		log.Error("failed to fetch zone totals: ", err)
 		return nil, err
 	}
 
@@ -510,7 +510,7 @@ func fetchColoTotals(zoneIDs []string) (*cloudflareResponseColo, error) {
 	graphqlClient := graphql.NewClient(cfGraphQLEndpoint)
 	var resp cloudflareResponseColo
 	if err := graphqlClient.Run(ctx, request, &resp); err != nil {
-		log.Error(err)
+		log.Error("failed to fetch colocation totals: ", err)
 		return nil, err
 	}
 
@@ -570,7 +570,7 @@ func fetchWorkerTotals(accountID string) (*cloudflareResponseAccts, error) {
 	graphqlClient := graphql.NewClient(cfGraphQLEndpoint)
 	var resp cloudflareResponseAccts
 	if err := graphqlClient.Run(ctx, request, &resp); err != nil {
-		log.Error(err)
+		log.Error("failed to fetch worker totals: ", err)
 		return nil, err
 	}
 
@@ -647,7 +647,7 @@ func fetchLoadBalancerTotals(zoneIDs []string) (*cloudflareResponseLb, error) {
 	graphqlClient := graphql.NewClient(cfGraphQLEndpoint)
 	var resp cloudflareResponseLb
 	if err := graphqlClient.Run(ctx, request, &resp); err != nil {
-		log.Error(err)
+		log.Error("failed to fetch load balancer totals: ", err)
 		return nil, err
 	}
 	return &resp, nil
@@ -699,7 +699,7 @@ func fetchLogpushAccount(accountID string) (*cloudflareResponseLogpushAccount, e
 	graphqlClient := graphql.NewClient(cfGraphQLEndpoint)
 	var resp cloudflareResponseLogpushAccount
 	if err := graphqlClient.Run(ctx, request, &resp); err != nil {
-		log.Error(err)
+		log.Error("failed to logpush account info: ", err)
 		return nil, err
 	}
 	return &resp, nil
@@ -751,7 +751,7 @@ func fetchLogpushZone(zoneIDs []string) (*cloudflareResponseLogpushZone, error) 
 	graphqlClient := graphql.NewClient(cfGraphQLEndpoint)
 	var resp cloudflareResponseLogpushZone
 	if err := graphqlClient.Run(ctx, request, &resp); err != nil {
-		log.Error(err)
+		log.Error("failed to fetch logpush zone: ", err)
 		return nil, err
 	}
 

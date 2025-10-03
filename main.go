@@ -162,7 +162,7 @@ func runExpoter() {
 	}
 	deniedMetricsSet, err := buildDeniedMetricsSet(metricsDenylist)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("failed to build denied metrics set: ", err)
 	}
 	mustRegisterMetrics(deniedMetricsSet)
 
