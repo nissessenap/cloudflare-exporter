@@ -194,19 +194,18 @@ func runExpoter() {
 
 func main() {
 	var cmd = &cobra.Command{
-		Use:   "viper-test",
-		Short: "testing viper",
+		Use:   "cloudflare_exporter",
+		Short: "Prometheus exporter exposing Cloudflare Analytics dashboard data on a per-zone basis, as well as Worker metrics",
 		Run: func(_ *cobra.Command, _ []string) {
 			runExpoter()
 		},
 	}
 
-	//vip := viper.New()
 	viper.AutomaticEnv()
 
 	flags := cmd.Flags()
 
-	flags.String("listen", ":8080", "listen on addr:port ( default :8080), omit addr to listen on all interfaces")
+	flags.String("listen", ":8080", "listen on addr:port (default :8080), omit addr to listen on all interfaces")
 	viper.BindEnv("listen")
 	viper.SetDefault("listen", ":8080")
 
@@ -223,11 +222,11 @@ func main() {
 	flags.String("cf_api_token", "", "cloudflare api token (preferred)")
 	viper.BindEnv("cf_api_token")
 
-	flags.String("cf_zones", "", "cloudflare zones to export, comma delimited list")
+	flags.String("cf_zones", "", "cloudflare zones to export, comma delimited list of zone ids")
 	viper.BindEnv("cf_zones")
 	viper.SetDefault("cf_zones", "")
 
-	flags.String("cf_exclude_zones", "", "cloudflare zones to exclude, comma delimited list")
+	flags.String("cf_exclude_zones", "", "cloudflare zones to exclude, comma delimited list of zone ids")
 	viper.BindEnv("cf_exclude_zones")
 	viper.SetDefault("cf_exclude_zones", "")
 
