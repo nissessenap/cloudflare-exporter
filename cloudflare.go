@@ -311,7 +311,7 @@ func fetchFirewallRules(zoneID string) map[string]string {
 		if rulesetDesc.Phase == "http_request_firewall_managed" {
 			ruleset, err := cloudflareAPI.GetRuleset(ctx, cloudflare.ZoneIdentifier(zoneID), rulesetDesc.ID)
 			if err != nil {
-        log.Fatalf("Error fetching ruleset for firewall rules: %s", err)
+				log.Fatalf("Error fetching ruleset for firewall rules: %s", err)
 			}
 			for _, rule := range ruleset.Rules {
 				firewallRulesMap[rule.ID] = rule.Description
@@ -319,9 +319,9 @@ func fetchFirewallRules(zoneID string) map[string]string {
 		}
 
 		if rulesetDesc.Phase == "http_request_firewall_custom" {
-			ruleset, err := api.GetRuleset(ctx, cloudflare.ZoneIdentifier(zoneID), rulesetDesc.ID)
+			ruleset, err := cloudflareAPI.GetRuleset(ctx, cloudflare.ZoneIdentifier(zoneID), rulesetDesc.ID)
 			if err != nil {
-        log.Fatal("Error fetching custom firewall rulesets: %s" err)
+				log.Fatalf("Error fetching custom firewall rulesets: %s", err)
 			}
 			for _, rule := range ruleset.Rules {
 				firewallRulesMap[rule.ID] = rule.Description
@@ -843,7 +843,7 @@ func extractZoneIDs(zones []cloudflare.Zone) []string {
 
 func filterNonFreePlanZones(zones []cloudflare.Zone) (filteredZones []cloudflare.Zone) {
 	for _, z := range zones {
-		if z.Plan.ZonePlanCommon.ID != "0feeeeeeeeeeeeeeeeeeeeeeeeeeeeee" {
+		if z.Plan.ID != "0feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" {
 			filteredZones = append(filteredZones, z)
 		}
 	}

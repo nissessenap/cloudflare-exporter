@@ -3,8 +3,7 @@ package main
 import (
 	"context"
 	"net/http"
-	_ "net/http/pprof"
-	"os"
+	_ "net/http/pprof" // #nosec G108 - pprof is controlled via enable_pprof flag
 	"strings"
 	"sync"
 	"time"
@@ -135,7 +134,16 @@ func fetchMetrics() {
 func runExporter() {
 	cfgMetricsPath := viper.GetString("metrics_path")
 
-	if !(len(viper.GetString("cf_api_token")) > 0 || (len(viper.GetString("cf_api_email")) > 0 && len(viper.GetString("cf_api_key")) > 0)) {
+	// Handle pprof configuration
+	if !viper.GetBool("enable_pprof") {
+		// Remove pprof handlers from default mux if disabled
+		http.DefaultServeMux = http.NewServeMux()
+		log.Info("pprof disabled")
+	} else {
+		log.Warn("pprof enabled - profiling endpoints available at /debug/pprof/")
+	}
+
+	if len(viper.GetString("cf_api_token")) == 0 && (len(viper.GetString("cf_api_email")) == 0 || len(viper.GetString("cf_api_key")) == 0) {
 		log.Fatal("Please provide CF_API_KEY+CF_API_EMAIL or CF_API_TOKEN")
 	}
 	if viper.GetInt("cf_batch_size") < 1 || viper.GetInt("cf_batch_size") > 10 {
@@ -153,7 +161,6 @@ func runExporter() {
 
 	if len(viper.GetString("cf_api_token")) > 0 {
 		cloudflareAPI, err = cloudflare.NewWithAPIToken(viper.GetString("cf_api_token"))
-
 	} else {
 		cloudflareAPI, err = cloudflare.New(viper.GetString("cf_api_key"), viper.GetString("cf_api_email"))
 	}
@@ -263,6 +270,10 @@ func main() {
 	flags.String("log_level", "info", "log level")
 	viper.BindEnv("log_level")
 	viper.SetDefault("log_level", "info")
+
+	flags.Bool("enable_pprof", false, "enable pprof profiling endpoints at /debug/pprof/")
+	viper.BindEnv("enable_pprof")
+	viper.SetDefault("enable_pprof", false)
 
 	viper.BindPFlags(flags)
 	cmd.Execute()
