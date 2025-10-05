@@ -37,6 +37,14 @@ lint:
 # Run all checks (formatting + linting)
 check: fmt-check lint
 
+# Run unit tests only
+unit-tests:
+	go test ./... -v
+
+# Run comprehensive tests for release/PR submission (without e2e)
+pr-tests: clean fmt-check lint build test
+	@echo "🎉 All release tests passed! Ready for PR submission."
+
 # Clean build artifacts
 clean:
 	rm -f cloudflare_exporter venom*.log basic_tests.* pprof_cpu*
@@ -53,12 +61,14 @@ help:
 	@echo "  fmt-check  - Check if code is properly formatted (CI-friendly)"
 	@echo "  lint       - Run golangci-lint to check code quality"
 	@echo "  check      - Run all checks (fmt-check + lint)"
-	@echo "  test       - Run end-to-end tests"
+	@echo "  test       - Run end-to-end tests (requires additional setup)"
+	@echo "  pr-tests - Run comprehensive tests for PR submission"
 	@echo "  clean      - Remove build artifacts and temporary files"
-	@echo "  vet        - Run go vet to check code quality"
 	@echo "  help       - Show this help message"
 	@echo ""
 	@echo "Common workflows:"
 	@echo "  make fmt && make build  - Format code and build"
 	@echo "  make check             - Run all code quality checks"
+	@echo "  make unit-tests        - Run unit tests only"
+	@echo "  make pr-tests          - Run full test suite for PR/release"
 	@echo "  make clean build       - Clean and rebuild"
