@@ -187,8 +187,11 @@ func runExporter() {
 	log.Debugf("Metrics set: %v", metricsSet)
 	mustRegisterMetrics(metricsSet)
 
+	scrapeInterval := time.Duration(viper.GetInt("scrape_interval")) * time.Second
+	log.Info("Scrape interval set to ", scrapeInterval)
+
 	go func() {
-		for ; true; <-time.NewTicker(60 * time.Second).C {
+		for ; true; <-time.NewTicker(scrapeInterval).C {
 			go fetchMetrics()
 		}
 	}()
@@ -254,6 +257,10 @@ func main() {
 	flags.Int("scrape_delay", 300, "scrape delay in seconds0")
 	viper.BindEnv("scrape_delay")
 	viper.SetDefault("scrape_delay", 300)
+
+	flags.Int("scrape_interval", 60, "scrape interval in seconds, defaults to 60")
+	viper.BindEnv("scrape_interval")
+	viper.SetDefault("scrape_interval", 60)
 
 	flags.Int("cf_batch_size", 10, "cloudflare zones batch size (1-10)")
 	viper.BindEnv("cf_batch_size")
