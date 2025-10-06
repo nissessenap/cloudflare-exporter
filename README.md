@@ -32,6 +32,8 @@ Required authentication scopes:
 
 To authenticate this way, only set `CF_API_TOKEN` (omit `CF_API_EMAIL` and `CF_API_KEY`)
 
+[Shortcut to create the API token](https://dash.cloudflare.com/profile/api-tokens?permissionGroupKeys=%5B%7B%22key%22%3A%22account_analytics%22%2C%22type%22%3A%22read%22%7D%2C%7B%22key%22%3A%22account_settings%22%2C%22type%22%3A%22read%22%7D%2C%7B%22key%22%3A%22analytics%22%2C%22type%22%3A%22read%22%7D%2C%7B%22key%22%3A%22firewall_services%22%2C%22type%22%3A%22read%22%7D%5D&name=Cloudflare+Exporter&accountId=*&zoneId=all)
+
 ### User email + API key
 To authenticate with user email + API key, use the `Global API Key` from the Cloudflare dashboard.
 Beware that this key authenticates with write access to every Cloudflare resource.
@@ -55,6 +57,7 @@ The exporter can be configured using env variables or command flags.
 | `SCRAPE_INTERVAL` | scrape interval in seconds (will query cloudflare every SCRAPE_INTERVAL seconds), default `60` |
 | `CF_BATCH_SIZE` | cloudflare request zones batch size (1 - 10), default `10` |
 | `METRICS_DENYLIST` | (Optional) cloudflare-exporter metrics to not export, comma delimited list of cloudflare-exporter metrics. If not set, all metrics are exported |
+| `ENABLE_PPROF` | (Optional) enable pprof profiling endpoints at `/debug/pprof/`. Accepts `true` or `false`, default `false`. **Warning**: Only enable in development/debugging environments |
 | `ZONE_<NAME>` |  `DEPRECATED since 0.0.5` (optional) Zone ID. Add zones you want to scrape by adding env vars in this format. You can find the zone ids in Cloudflare dashboards. |
 
 Corresponding flags:
@@ -71,6 +74,7 @@ Corresponding flags:
   -scrape_interval=60: scrape interval in seconds, defaults to 60
   -cf_batch_size=10: cloudflare zones batch size (1-10)
   -metrics_denylist="": cloudflare-exporter metrics to not export, comma delimited list
+  -enable_pprof=false: enable pprof profiling endpoints at /debug/pprof/
 ```
 
 Note: `ZONE_<name>` configuration is not supported as flag.
@@ -106,6 +110,9 @@ Note: `ZONE_<name>` configuration is not supported as flag.
 # HELP cloudflare_zone_pool_requests_total Requests per pool
 # HELP cloudflare_logpush_failed_jobs_account_count Number of failed logpush jobs on the account level
 # HELP cloudflare_logpush_failed_jobs_zone_count Number of failed logpush jobs on the zone level
+# HELP cloudflare_r2_operation_count Number of operations performed by R2
+# HELP cloudflare_r2_storage_bytes Storage used by R2
+# HELP cloudflare_r2_storage_total_bytes Total storage used by R2
 ```
 
 ## Helm chart repository
@@ -148,6 +155,46 @@ docker run --rm -p 8080:8080 -e CF_API_TOKEN=${CF_API_TOKEN} -e FREE_TIER=true g
 Access help:
 ```
 docker run --rm -p 8080:8080 -i ghcr.io/lablabs/cloudflare_exporter --help
+```
+
+## Development
+
+### Building and Testing
+
+This project uses a Makefile for common development tasks. Available targets:
+
+- `make help` - Show all available targets
+- `make fmt` - Format Go code using `go fmt` and `goimports`
+- `make fmt-check` - Check if code is properly formatted (CI-friendly)
+- `make lint` - Run golangci-lint to check code quality
+- `make check` - Run all checks (formatting + linting)
+- `make build` - Build the binary (runs checks first)
+- `make test` - Run end-to-end tests
+- `make clean` - Remove build artifacts
+
+### Prerequisites
+
+Make sure you have the following tools installed:
+
+```bash
+# Install goimports for import formatting
+go install golang.org/x/tools/cmd/goimports@latest
+
+# Install golangci-lint for linting
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+```
+
+### Common Workflows
+
+```bash
+# Format code and build
+make fmt && make build
+
+# Run all code quality checks
+make check
+
+# Clean and rebuild
+make clean build
 ```
 
 ## Contributing and reporting issues
