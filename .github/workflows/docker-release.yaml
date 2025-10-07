@@ -11,6 +11,8 @@ jobs:
       contents: read
       packages: write
       id-token: write
+      attestations: write
+
     name: Build Docker image and push to repositories with version tag
     runs-on: ubuntu-latest
     steps:
@@ -68,5 +70,14 @@ jobs:
 
           ko build --sbom=none --image-refs ./image-digest --bare --platform linux/arm64,linux/amd64 -t ${IMAGE_VERSION} $LABELS
 
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+          # Extract image digest from ko output
+          IMAGE_DIGEST=$(cat ./image-digest)
+          echo "digest=${IMAGE_DIGEST}" >> $GITHUB_OUTPUT
+
+      - name: Attest
+        uses: actions/attest-build-provenance@v2
+        id: attest
+        with:
+          subject-name: ghcr.io/${{ github.repository }}
+          subject-digest: ${{ steps.publish-image.outputs.digest }}
+          push-to-registry: true
