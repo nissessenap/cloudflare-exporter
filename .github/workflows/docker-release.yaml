@@ -60,15 +60,7 @@ jobs:
           KO_DOCKER_REPO: "ghcr.io/${{ github.repository }}"
         run: |
           # Build multi-platform with labels from docker/metadata-action
-          # Convert multiline labels output to --image-label args
-          LABELS=""
-          while IFS= read -r label; do
-            if [ -n "$label" ]; then
-              LABELS="$LABELS --image-label $label"
-            fi
-          done <<< "${{ steps.meta.outputs.labels }}"
-
-          ko build . --sbom=none --image-refs ./image-digest --bare --platform linux/arm64,linux/amd64 -t ${IMAGE_VERSION} $LABELS
+          ko build . --sbom=none --image-refs ./image-digest --bare --platform linux/arm64,linux/amd64 -t ${IMAGE_VERSION} 
 
           # Extract image digest from ko output
           # The file contains multiple lines (one per platform + manifest list at the end)
