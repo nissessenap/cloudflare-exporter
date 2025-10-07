@@ -83,7 +83,7 @@ jobs:
       - name: Copy image to dockerhub
         env:
           IMAGE_VERSION: ${{ github.ref_name }}
-          DOCKER_REPO: "ghcr.io/${{ github.repository }}"
+          GHCR_REPO: "ghcr.io/${{ github.repository }}"
           GHCR_USERNAME: ${{ github.actor }}
           GHCR_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -93,5 +93,5 @@ jobs:
             copy --multi-arch all \
             --src-creds "$GHCR_USERNAME:$GHCR_PASSWORD" \
             --dest-creds "$DOCKER_USERNAME:$DOCKER_TOKEN" \
-            docker://${DOCKER_REPO}:${IMAGE_VERSION} \
-            docker://quay.io/lablabs/cloudflare_exporter:${IMAGE_VERSION}
+            docker://${GHCR_REPO}:${IMAGE_VERSION} \
+            docker://lablabs/cloudflare_exporter:${IMAGE_VERSION}
