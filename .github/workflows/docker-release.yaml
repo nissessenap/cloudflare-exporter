@@ -59,8 +59,15 @@ jobs:
           IMAGE_VERSION: ${{ github.ref_name }}
           KO_DOCKER_REPO: "ghcr.io/${{ github.repository }}"
         run: |
-          # Build multi-platform with labels from docker/metadata-action
-          ko build . --sbom=none --image-refs ./image-digest --bare --platform linux/arm64,linux/amd64 -t ${IMAGE_VERSION} 
+          ko build . --sbom=none --image-refs ./image-digest --bare --platform linux/arm64,linux/amd64 -t ${IMAGE_VERSION} \
+            --image-label org.opencontainers.image.title=cloudflare-exporter \
+            --image-label org.opencontainers.image.description="Prometheus CloudFlare Exporter" \
+            --image-label org.opencontainers.image.url=${{ github.server_url }}/${{ github.repository }} \
+            --image-label org.opencontainers.image.revision=${{ github.sha }} \
+            --image-label org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }} \
+            --image-label org.opencontainers.image.licenses=Apache-2.0 \
+            --image-label org.opencontainers.image.version=${IMAGE_VERSION} \
+            --image-label org.opencontainers.image.created="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 
           # Extract image digest from ko output
           # The file contains multiple lines (one per platform + manifest list at the end)
