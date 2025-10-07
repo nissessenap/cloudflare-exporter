@@ -72,6 +72,9 @@ jobs:
 
           # Extract image digest from ko output
           # The file contains the full image reference, take the last line (manifest list) and extract just the digest
+          echo "hello world"
+          ls -la 
+          cat ./image-digest
           IMAGE_REF=$(cat ./image-digest)
           #IMAGE_REF=$(tail -n 1 ./image-digest)
           IMAGE_DIGEST=$(echo "$IMAGE_REF" | cut -d'@' -f2)
