@@ -61,25 +61,32 @@ jobs:
         run: |
           # Build multi-platform with labels from docker/metadata-action
           # Convert multiline labels output to --image-label args
+          LABELS=""
+          while IFS= read -r label; do
+            if [ -n "$label" ]; then
+              LABELS="$LABELS --image-label $label"
+            fi
+          done <<< "${{ steps.meta.outputs.labels }}"
 
-
-          ko build . --sbom=none --image-refs ./image-digest --bare --platform linux/arm64,linux/amd64 -t ${IMAGE_VERSION}
+          ko build . --sbom=none --image-refs ./image-digest --bare --platform linux/arm64,linux/amd64 -t ${IMAGE_VERSION} $LABELS
 
           # Extract image digest from ko output
-          # The file contains the full image reference, take the last line (manifest list) and extract just the digest
-          echo "hello world"
-          ls -la 
+          # The file contains multiple lines (one per platform + manifest list at the end)
+          # We need only the last line (manifest list) for attestation
           cat ./image-digest
-          IMAGE_REF=$(cat ./image-digest)
-          #IMAGE_REF=$(tail -n 1 ./image-digest)
+          IMAGE_REF=$(tail -n 1 ./image-digest)
           IMAGE_DIGEST=$(echo "$IMAGE_REF" | cut -d'@' -f2)
-          echo "digest=$IMAGE_DIGEST" >> $GITHUB_OUTPUT
-          echo "image-ref=$IMAGE_REF" >> $GITHUB_OUTPUT
 
-      # - name: Attest
-      #   uses: actions/attest-build-provenance@v2
-      #   id: attest
-      #   with:
-      #     subject-name: ghcr.io/${{ github.repository }}
-      #     subject-digest: ${{ steps.publish-image.outputs.digest }}
-      #     push-to-registry: true
+          echo "Image reference: $IMAGE_REF"
+          echo "Image digest: $IMAGE_DIGEST"
+
+          echo "digest=$IMAGE_DIGEST" >> "$GITHUB_OUTPUT"
+          echo "image-ref=$IMAGE_REF" >> "$GITHUB_OUTPUT"
+
+      - name: Attest
+        uses: actions/attest-build-provenance@v2
+        id: attest
+        with:
+          subject-name: ghcr.io/${{ github.repository }}
+          subject-digest: ${{ steps.publish-image.outputs.digest }}
+          push-to-registry: true
