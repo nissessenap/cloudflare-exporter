@@ -68,7 +68,7 @@ jobs:
             fi
           done <<< "${{ steps.meta.outputs.labels }}"
 
-          ko build --sbom=none --image-refs ./image-digest --bare --platform linux/arm64,linux/amd64 -t ${IMAGE_VERSION} $LABELS
+          ko build . --sbom=none --image-refs ./image-digest --bare --platform linux/arm64,linux/amd64 -t ${IMAGE_VERSION} $LABELS
 
           # Extract image digest from ko output (removes image name, keeps only sha256:... part)
           IMAGE_REF=$(cat ./image-digest)
