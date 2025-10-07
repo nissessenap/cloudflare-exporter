@@ -73,7 +73,7 @@ jobs:
           # The file contains multiple lines (one per platform + manifest list at the end)
           # We need only the last line (manifest list) for attestation
           cat ./image-digest
-          IMAGE_REF=$(tail -n 1 ./image-digest)
+          IMAGE_REF=$(head -n 1 ./image-digest)
           IMAGE_DIGEST=$(echo "$IMAGE_REF" | cut -d'@' -f2)
 
           echo "Image reference: $IMAGE_REF"
