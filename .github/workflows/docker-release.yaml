@@ -70,9 +70,11 @@ jobs:
 
           ko build --sbom=none --image-refs ./image-digest --bare --platform linux/arm64,linux/amd64 -t ${IMAGE_VERSION} $LABELS
 
-          # Extract image digest from ko output
-          IMAGE_DIGEST=$(cat ./image-digest)
+          # Extract image digest from ko output (removes image name, keeps only sha256:... part)
+          IMAGE_REF=$(cat ./image-digest)
+          IMAGE_DIGEST=$(echo "$IMAGE_REF" | sed 's/.*@//')
           echo "digest=${IMAGE_DIGEST}" >> $GITHUB_OUTPUT
+          echo "image-ref=${IMAGE_REF}" >> $GITHUB_OUTPUT
 
       - name: Attest
         uses: actions/attest-build-provenance@v2
