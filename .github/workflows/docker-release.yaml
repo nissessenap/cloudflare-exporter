@@ -19,23 +19,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      # Help to generate the labels for ko
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: |
-            ghcr.io/${{ github.repository }}/cloudflare_exporter
-          # generate Docker tags based on the following events/attributes
-          tags: type=ref,event=tag
-        
-      # TODO, enable dockerhub again when I'm done testing localy
-      # - name: Login to DockerHub
-      #   uses: docker/login-action@v3
-      #   with:
-      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
-      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Login to Github Packages
         uses: docker/login-action@v3
         with:
@@ -89,3 +72,26 @@ jobs:
           subject-name: ghcr.io/${{ github.repository }}
           subject-digest: ${{ steps.publish-image.outputs.digest }}
           push-to-registry: true
+
+  distribute-to-dockerhub:
+    runs-on: ubuntu-latest
+    needs:
+      - build-and-push-docker-image
+    permissions:
+      packages: read
+    steps:
+      - name: Copy image to dockerhub
+        env:
+          IMAGE_VERSION: ${{ github.ref_name }}
+          DOCKER_REPO: "ghcr.io/${{ github.repository }}"
+          GHCR_USERNAME: ${{ github.actor }}
+          GHCR_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKER_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          docker run --rm quay.io/containers/skopeo:v1.18.0 \
+            copy --multi-arch all \
+            --src-creds "$GHCR_USERNAME:$GHCR_PASSWORD" \
+            --dest-creds "$DOCKER_USERNAME:$DOCKER_TOKEN" \
+            docker://${DOCKER_REPO}:${IMAGE_VERSION} \
+            docker://quay.io/lablabs/cloudflare_exporter:${IMAGE_VERSION}
