@@ -61,12 +61,7 @@ jobs:
         run: |
           # Build multi-platform with labels from docker/metadata-action
           # Convert multiline labels output to --image-label args
-          LABELS=""
-          while IFS= read -r label; do
-            if [ -n "$label" ]; then
-              LABELS="$LABELS --image-label $label"
-            fi
-          done <<< "${{ steps.meta.outputs.labels }}"
+
 
           ko build . --sbom=none --image-refs ./image-digest --bare --platform linux/arm64,linux/amd64 -t ${IMAGE_VERSION}
 
@@ -81,10 +76,10 @@ jobs:
           echo "digest=$IMAGE_DIGEST" >> $GITHUB_OUTPUT
           echo "image-ref=$IMAGE_REF" >> $GITHUB_OUTPUT
 
-      - name: Attest
-        uses: actions/attest-build-provenance@v2
-        id: attest
-        with:
-          subject-name: ghcr.io/${{ github.repository }}
-          subject-digest: ${{ steps.publish-image.outputs.digest }}
-          push-to-registry: true
+      # - name: Attest
+      #   uses: actions/attest-build-provenance@v2
+      #   id: attest
+      #   with:
+      #     subject-name: ghcr.io/${{ github.repository }}
+      #     subject-digest: ${{ steps.publish-image.outputs.digest }}
+      #     push-to-registry: true
