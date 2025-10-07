@@ -69,13 +69,14 @@ jobs:
           done <<< "${{ steps.meta.outputs.labels }}"
 
           ko build . --sbom=none --image-refs ./image-digest --bare --platform linux/arm64,linux/amd64 -t ${IMAGE_VERSION}
-          # ko build . --sbom=none
 
-          # Extract image digest from ko output (removes image name, keeps only sha256:... part)
+          # Extract image digest from ko output
+          # The file contains the full image reference, take the last line (manifest list) and extract just the digest
           IMAGE_REF=$(cat ./image-digest)
-          IMAGE_DIGEST=$(echo "$IMAGE_REF" | sed 's/.*@//')
-          echo "digest=${IMAGE_DIGEST}" >> $GITHUB_OUTPUT
-          echo "image-ref=${IMAGE_REF}" >> $GITHUB_OUTPUT
+          #IMAGE_REF=$(tail -n 1 ./image-digest)
+          IMAGE_DIGEST=$(echo "$IMAGE_REF" | cut -d'@' -f2)
+          echo "digest=$IMAGE_DIGEST" >> $GITHUB_OUTPUT
+          echo "image-ref=$IMAGE_REF" >> $GITHUB_OUTPUT
 
       - name: Attest
         uses: actions/attest-build-provenance@v2
