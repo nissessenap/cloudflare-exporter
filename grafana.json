@@ -714,7 +714,7 @@
                         "uid": "mimir-o11y"
                     },
                     "editorMode": "code",
-                    "expr": "cloudflare_zone_requests_country{zone='$zone'}",
+                    "expr": "cloudflare_zone_requests_country{zone=\"$zone\"}",
                     "instant": true,
                     "interval": "",
                     "legendFormat": "{{country}}",
@@ -2208,7 +2208,7 @@
                         "uid": "mimir-o11y"
                     },
                     "editorMode": "code",
-                    "expr": "cloudflare_zone_requests_status{zone='$zone'}",
+                    "expr": "cloudflare_zone_requests_status{zone=\"$zone\"}",
                     "interval": "",
                     "legendFormat": "{{ status }}",
                     "range": true,
@@ -2437,7 +2437,7 @@
                         "uid": "mimir-o11y"
                     },
                     "editorMode": "code",
-                    "expr": "cloudflare_zone_requests_content_type{zone='$zone'}",
+                    "expr": "cloudflare_zone_requests_content_type{zone=\"$zone\"}",
                     "instant": true,
                     "interval": "",
                     "legendFormat": "{{content_type}}",
