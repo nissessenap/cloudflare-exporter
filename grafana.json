@@ -15,7 +15,7 @@
             }
         ]
     },
-    "description": "Last 12 hours - Updates every 5 minutes\r\n\r\nGrafana dashboard available at:\r\nhttps://grafana.com/grafana/dashboards/22131-cloudflare-public-analytics-elhacker-net/\r\n\r\nPrometheus Source:\r\nhttps://github.com/lablabs/cloudflare-exporter\r\n",
+    "description": "Last 12 hours - Updates every 5 minutes\r\n\r\nSupports multi-zone selection via the zone dropdown.\r\n\r\nPrometheus Source:\r\nhttps://github.com/lablabs/cloudflare-exporter\r\n",
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
@@ -714,7 +714,7 @@
                         "uid": "mimir-o11y"
                     },
                     "editorMode": "code",
-                    "expr": "cloudflare_zone_requests_country{zone='elhacker.net'}",
+                    "expr": "cloudflare_zone_requests_country{zone='$zone'}",
                     "instant": true,
                     "interval": "",
                     "legendFormat": "{{country}}",
@@ -2058,7 +2058,7 @@
                     "disableTextWrap": false,
                     "editorMode": "code",
                     "exemplar": false,
-                    "expr": "cloudflare_zone_requests_country{zone=~\"elhacker.net\"}",
+                    "expr": "cloudflare_zone_requests_country{zone=~\"$zone\"}",
                     "format": "table",
                     "fullMetaSearch": false,
                     "hide": false,
@@ -2208,7 +2208,7 @@
                         "uid": "mimir-o11y"
                     },
                     "editorMode": "code",
-                    "expr": "cloudflare_zone_requests_status{zone='elhacker.net'}",
+                    "expr": "cloudflare_zone_requests_status{zone='$zone'}",
                     "interval": "",
                     "legendFormat": "{{ status }}",
                     "range": true,
@@ -2437,7 +2437,7 @@
                         "uid": "mimir-o11y"
                     },
                     "editorMode": "code",
-                    "expr": "cloudflare_zone_requests_content_type{zone='elhacker.net'}",
+                    "expr": "cloudflare_zone_requests_content_type{zone='$zone'}",
                     "instant": true,
                     "interval": "",
                     "legendFormat": "{{content_type}}",
@@ -2608,7 +2608,7 @@
                         "uid": "mimir-o11y"
                     },
                     "editorMode": "code",
-                    "expr": "increase(cloudflare_zone_requests_status{zone=\"elhacker.net\", status!~\"2..\"}[14m]) ",
+                    "expr": "increase(cloudflare_zone_requests_status{zone=\"$zone\", status!~\"2..\"}[14m]) ",
                     "interval": "",
                     "intervalFactor": 10,
                     "legendFormat": "{{status}}",
@@ -2855,7 +2855,7 @@
                         "uid": "mimir-o11y"
                     },
                     "editorMode": "code",
-                    "expr": "cloudflare_zone_threats_country{zone=\"elhacker.net\"}",
+                    "expr": "cloudflare_zone_threats_country{zone=\"$zone\"}",
                     "format": "table",
                     "interval": "",
                     "legendFormat": "{{country}}",
@@ -2976,7 +2976,7 @@
                         "uid": "mimir-o11y"
                     },
                     "editorMode": "code",
-                    "expr": "rate(cloudflare_zone_requests_total{zone=~\"elhacker.net\"}[10m])",
+                    "expr": "rate(cloudflare_zone_requests_total{zone=~\"$zone\"}[10m])",
                     "interval": "",
                     "intervalFactor": 10,
                     "legendFormat": "total",
@@ -2989,7 +2989,7 @@
                         "uid": "mimir-o11y"
                     },
                     "editorMode": "code",
-                    "expr": "rate(cloudflare_zone_requests_cached{zone=~\"elhacker.net\"}[10m])",
+                    "expr": "rate(cloudflare_zone_requests_cached{zone=~\"$zone\"}[10m])",
                     "interval": "",
                     "intervalFactor": 10,
                     "legendFormat": "cached",
@@ -3254,7 +3254,34 @@
         "Cloudflare"
     ],
     "templating": {
-        "list": []
+        "list": [
+            {
+                "current": {
+                    "selected": false,
+                    "text": "",
+                    "value": ""
+                },
+                "datasource": {
+                    "type": "prometheus",
+                    "uid": "mimir-o11y"
+                },
+                "definition": "label_values(cloudflare_zone_requests_total, zone)",
+                "hide": 0,
+                "includeAll": false,
+                "multi": false,
+                "name": "zone",
+                "options": [],
+                "query": {
+                    "query": "label_values(cloudflare_zone_requests_total, zone)",
+                    "refId": "PrometheusVariableQueryEditor-VariableQuery"
+                },
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 1,
+                "type": "query"
+            }
+        ]
     },
     "time": {
         "from": "now-1h",
