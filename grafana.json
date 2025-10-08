@@ -116,7 +116,7 @@
                     "refId": "B"
                 }
             ],
-            "title": "Eventos-Hits Reglas Firewall - WAF",
+            "title": "Events-Hits Firewall Rules - WAF",
             "transformations": [
                 {
                     "id": "renameByRegex",
@@ -584,7 +584,7 @@
                     "refId": "B"
                 }
             ],
-            "title": "Eventos WAF",
+            "title": "WAF Events",
             "transformations": [
                 {
                     "id": "renameByRegex",
@@ -846,7 +846,7 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(NL.*)",
-                        "renamePattern": "Países Bajos "
+                        "renamePattern": "Netherlands"
                     }
                 },
                 {
@@ -860,14 +860,14 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(CA.*)",
-                        "renamePattern": "Canadá "
+                        "renamePattern": "Canada"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(BO.*)",
-                        "renamePattern": "Bolívia"
+                        "renamePattern": "Bolivia"
                     }
                 },
                 {
@@ -902,7 +902,7 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(JP.*)",
-                        "renamePattern": "Japón"
+                        "renamePattern": "Japan"
                     }
                 },
                 {
@@ -916,7 +916,7 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(FI.*)",
-                        "renamePattern": "Finlandia"
+                        "renamePattern": "Finland"
                     }
                 },
                 {
@@ -958,14 +958,14 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(DO.*)",
-                        "renamePattern": "República Dominicana"
+                        "renamePattern": "Dominican Republic"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(BE.*)",
-                        "renamePattern": "Bélgica"
+                        "renamePattern": "Belgium"
                     }
                 },
                 {
@@ -979,35 +979,35 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(ET.*)",
-                        "renamePattern": "Etiopía"
+                        "renamePattern": "Ethiopia"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(SA.*)",
-                        "renamePattern": "Arabia Saudita"
+                        "renamePattern": "Saudi Arabia"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(NZ.*)",
-                        "renamePattern": "Nueva Zelanda"
+                        "renamePattern": "New Zealand"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(DK.*)",
-                        "renamePattern": "Dinamarca"
+                        "renamePattern": "Denmark"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(NO.*)",
-                        "renamePattern": "Noruega"
+                        "renamePattern": "Norway"
                     }
                 },
                 {
@@ -1021,7 +1021,7 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(RO.*)",
-                        "renamePattern": "Rumanía"
+                        "renamePattern": "Romania"
                     }
                 },
                 {
@@ -1042,14 +1042,14 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(SA.*)",
-                        "renamePattern": "Arabia Saudita"
+                        "renamePattern": "Saudi Arabia"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(ET.*)",
-                        "renamePattern": "Etiopía"
+                        "renamePattern": "Ethiopia"
                     }
                 },
                 {
@@ -1070,7 +1070,7 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(GR.*)",
-                        "renamePattern": "Grecia"
+                        "renamePattern": "Greece"
                     }
                 },
                 {
@@ -1084,21 +1084,21 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(EG.*)",
-                        "renamePattern": "Egipto"
+                        "renamePattern": "Egypt"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(SE.*)",
-                        "renamePattern": "Suecia"
+                        "renamePattern": "Sweden"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(IR.*)",
-                        "renamePattern": "Irán"
+                        "renamePattern": "Iran"
                     }
                 },
                 {
@@ -1112,7 +1112,7 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(PA.*)",
-                        "renamePattern": "Panamá"
+                        "renamePattern": "Panama"
                     }
                 },
                 {
@@ -1126,35 +1126,35 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(LT.*)",
-                        "renamePattern": "Lituania"
+                        "renamePattern": "Lithuania"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(TW.*)",
-                        "renamePattern": "Taiwán"
+                        "renamePattern": "Taiwan"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(AE.*)",
-                        "renamePattern": "Emiratos Árabes"
+                        "renamePattern": "United Arab Emirates"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(CH.*)",
-                        "renamePattern": "Suiza"
+                        "renamePattern": "Switzerland"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(TH.*)",
-                        "renamePattern": "Tailandia"
+                        "renamePattern": "Thailand"
                     }
                 },
                 {
@@ -1168,7 +1168,7 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(UA.*)",
-                        "renamePattern": "Ucrania"
+                        "renamePattern": "Ukraine"
                     }
                 },
                 {
@@ -1203,7 +1203,7 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(LU.*)",
-                        "renamePattern": "Luxemburgo"
+                        "renamePattern": "Luxembourg"
                     }
                 },
                 {
@@ -1231,21 +1231,21 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(PK.*)",
-                        "renamePattern": "Pakistán"
+                        "renamePattern": "Pakistan"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(CZ.*)",
-                        "renamePattern": "República Checa"
+                        "renamePattern": "Czech Republic"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(HR.*)",
-                        "renamePattern": "Croacia"
+                        "renamePattern": "Croatia"
                     }
                 },
                 {
@@ -1266,49 +1266,49 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(MA.*)",
-                        "renamePattern": "Marruecos"
+                        "renamePattern": "Morocco"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(KH.*)",
-                        "renamePattern": "Camboya"
+                        "renamePattern": "Cambodia"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(MM.*)",
-                        "renamePattern": "Birmania"
+                        "renamePattern": "Myanmar"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(SK.*)",
-                        "renamePattern": "Eslovaquia"
+                        "renamePattern": "Slovakia"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(MY.*)",
-                        "renamePattern": "Malasia"
+                        "renamePattern": "Malaysia"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(DZ.*)",
-                        "renamePattern": "Argelia"
+                        "renamePattern": "Algeria"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(UZ.*)",
-                        "renamePattern": "Uzbekistán"
+                        "renamePattern": "Uzbekistan"
                     }
                 },
                 {
@@ -1322,21 +1322,21 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(ZA.*)",
-                        "renamePattern": "Sudáfrica"
+                        "renamePattern": "South Africa"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(TR.*)",
-                        "renamePattern": "Turquía"
+                        "renamePattern": "Turkey"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(BA.*)",
-                        "renamePattern": "Bosnia y Herzegovina"
+                        "renamePattern": "Bosnia and Herzegovina"
                     }
                 },
                 {
@@ -1350,7 +1350,7 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(KR.*)",
-                        "renamePattern": "Corea del Sur"
+                        "renamePattern": "South Korea"
                     }
                 },
                 {
@@ -1385,7 +1385,7 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(KE.*)",
-                        "renamePattern": "Kenia"
+                        "renamePattern": "Kenya"
                     }
                 },
                 {
@@ -1413,21 +1413,21 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(LV.*)",
-                        "renamePattern": "Letonia"
+                        "renamePattern": "Latvia"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(SI.*)",
-                        "renamePattern": "Eslovenia"
+                        "renamePattern": "Slovenia"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(CY.*)",
-                        "renamePattern": "Chipre"
+                        "renamePattern": "Cyprus"
                     }
                 },
                 {
@@ -1441,7 +1441,7 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(PH.*)",
-                        "renamePattern": "Filipinas"
+                        "renamePattern": "Philippines"
                     }
                 },
                 {
@@ -1455,35 +1455,35 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(KZ.*)",
-                        "renamePattern": "Kazajistán"
+                        "renamePattern": "Kazakhstan"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(CM.*)",
-                        "renamePattern": "Camerún"
+                        "renamePattern": "Cameroon"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(IS.*)",
-                        "renamePattern": "Islandia"
+                        "renamePattern": "Iceland"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(MD.*)",
-                        "renamePattern": "Moldavia"
+                        "renamePattern": "Moldova"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(QA.*)",
-                        "renamePattern": "Catar​​​​"
+                        "renamePattern": "Qatar"
                     }
                 },
                 {
@@ -1530,7 +1530,7 @@
                                 "Japan",
                                 "Thailand",
                                 "Vietnam",
-                                "Croacia",
+                                "Croatia",
                                 "Uruguay",
                                 "Panama",
                                 "Tor",
@@ -1548,51 +1548,51 @@
                                 "Italy",
                                 "Serbia",
                                 "Seychelles",
-                                "Lituania",
+                                "Lithuania",
                                 "Cuba",
                                 "Myanmar",
                                 "Slovakia",
-                                "Islandia",
+                                "Iceland",
                                 "Israel",
-                                "Ucrania",
+                                "Ukraine",
                                 "Austria",
-                                "Malasia",
-                                "Pakistán",
-                                "Kazajistán",
+                                "Malaysia",
+                                "Pakistan",
+                                "Kazakhstan",
                                 "Paraguay",
                                 "Puerto Rico",
                                 "Sri Lanka",
-                                "Corea del Sur",
-                                "Sudáfrica",
-                                "Bélgica",
-                                "Letonia",
-                                "Catar​​​​",
+                                "South Korea",
+                                "South Africa",
+                                "Belgium",
+                                "Latvia",
+                                "Qatar",
                                 "Bangladesh",
                                 "Estonia",
-                                "Egipto",
-                                "Rumanía",
-                                "Argelia",
-                                "Camerún",
-                                "Bosnia y Herzegovina",
+                                "Egypt",
+                                "Romania",
+                                "Algeria",
+                                "Cameroon",
+                                "Bosnia and Herzegovina",
                                 "Aruba",
                                 "Kuwait",
                                 "Angola",
                                 "BY",
                                 "Albania",
-                                "Grecia",
+                                "Greece",
                                 "Andorra",
-                                "Guinea Ecuatorial",
-                                "Kenia",
+                                "Equatorial Guinea",
+                                "Kenya",
                                 "Bahamas",
-                                "Eslovenia",
+                                "Slovenia",
                                 "XX",
-                                "Chipre",
+                                "Cyprus",
                                 "Armenia",
                                 "Madagascar",
-                                "Arabia Saudita",
+                                "Saudi Arabia",
                                 "Georgia",
-                                "Moldavia",
-                                "Uzbekistán"
+                                "Moldova",
+                                "Uzbekistan"
                             ]
                         }
                     }
@@ -2028,7 +2028,7 @@
                             "lookup": "country",
                             "mode": "lookup"
                         },
-                        "name": "Peticiones",
+                        "name": "Requests",
                         "tooltip": true,
                         "type": "markers"
                     }
