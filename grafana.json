@@ -727,35 +727,35 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(SG.*)",
-                        "renamePattern": "Singapur"
+                        "renamePattern": "Singapore"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(US.*)",
-                        "renamePattern": "Estados Unidos"
+                        "renamePattern": "United States"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(ES.*)",
-                        "renamePattern": "España"
+                        "renamePattern": "Spain"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(MX.*)",
-                        "renamePattern": "México"
+                        "renamePattern": "Mexico"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(FR.*)",
-                        "renamePattern": "Francia"
+                        "renamePattern": "France"
                     }
                 },
                 {
@@ -769,14 +769,14 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(RU.*)",
-                        "renamePattern": "Rusia"
+                        "renamePattern": "Russia"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(PE.*)",
-                        "renamePattern": "Perú"
+                        "renamePattern": "Peru"
                     }
                 },
                 {
@@ -797,7 +797,7 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(GB.*)",
-                        "renamePattern": "Reino Unido"
+                        "renamePattern": "United Kingdom"
                     }
                 },
                 {
@@ -811,7 +811,7 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(IE.*)",
-                        "renamePattern": "Irlanda"
+                        "renamePattern": "Ireland"
                     }
                 },
                 {
@@ -825,21 +825,21 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(DE.*)",
-                        "renamePattern": "Alemania"
+                        "renamePattern": "Germany"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(HU.*)",
-                        "renamePattern": "Hungría"
+                        "renamePattern": "Hungary"
                     }
                 },
                 {
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(PL.*)",
-                        "renamePattern": "Polonia"
+                        "renamePattern": "Poland"
                     }
                 },
                 {
@@ -881,7 +881,7 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(BR.*)",
-                        "renamePattern": "Brasil"
+                        "renamePattern": "Brazil"
                     }
                 },
                 {
@@ -1014,7 +1014,7 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(IT.*)",
-                        "renamePattern": "Italia"
+                        "renamePattern": "Italy"
                     }
                 },
                 {
@@ -1196,7 +1196,7 @@
                     "id": "renameByRegex",
                     "options": {
                         "regex": "(FR.*)",
-                        "renamePattern": "Francia"
+                        "renamePattern": "France"
                     }
                 },
                 {
@@ -1492,33 +1492,33 @@
                         "include": {
                             "names": [
                                 "Time",
-                                "Emiratos Árabes",
+                                "United Arab Emirates",
                                 "Argentina",
                                 "Australia",
                                 "Bulgaria",
-                                "Bolívia",
-                                "Brasil",
-                                "Canadá ",
-                                "Suiza",
+                                "Bolivia",
+                                "Brazil",
+                                "Canada",
+                                "Switzerland",
                                 "Chile",
                                 "China",
                                 "Colombia",
-                                "Alemania",
+                                "Germany",
                                 "Ecuador",
-                                "España",
-                                "Finlandia",
-                                "Francia",
-                                "Reino Unido",
+                                "Spain",
+                                "Finland",
+                                "France",
+                                "United Kingdom",
                                 "Guatemala",
                                 "Hong Kong",
                                 "Honduras",
-                                "Hungría",
+                                "Hungary",
                                 "Irlanda",
                                 "India",
                                 "Irán",
-                                "México",
+                                "Mexico",
                                 "Países Bajos ",
-                                "Perú",
+                                "Peru",
                                 "Portugal",
                                 "Rusia",
                                 "Suecia",
@@ -1545,7 +1545,7 @@
                                 "Iraq",
                                 "Filipinas",
                                 "Dinamarca",
-                                "Italia",
+                                "Italy",
                                 "Serbia",
                                 "Seychelles",
                                 "Lituania",
