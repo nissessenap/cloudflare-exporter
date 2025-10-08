@@ -2209,9 +2209,9 @@
                     },
                     "editorMode": "code",
                     "expr": "cloudflare_zone_requests_status{zone=\"$zone\"}",
+                    "instant": true,
                     "interval": "",
                     "legendFormat": "{{ status }}",
-                    "range": true,
                     "refId": "A"
                 }
             ],
